@@ -6,7 +6,7 @@ Do not run this file directly.
 Rather, call this function from main.py and run that file.
 """
 
-
+import random
 def guess_number(low, high, num_attempts):
     """
     This function, named 'guess_number', generates a psudo-random integer in a given range, inclusive.
@@ -24,3 +24,29 @@ def guess_number(low, high, num_attempts):
     :param num_attempts: The number of attempts the user is given to guess the correct number.
     :returns: True if the user answers any attempt correctly, False otherwise.
     """
+    # Generate the pseudo-random integer
+    target_number = random.randint(low, high)
+    
+    # Inform the user of the range and number of attempts
+    print(f"Guess the number between {low} and {high}. You have {num_attempts} attempts.")
+    
+    for attempt in range(num_attempts):
+        try:
+            # Prompt the user to guess the number
+            guess = int(input(f"Attempt {attempt + 1}: "))
+            
+            # Check if the guess is correct
+            if guess == target_number:
+                print("Congratulations! You've guessed the correct number.")
+                return True
+            else:
+                print("Incorrect guess. Try again.")
+        except ValueError:
+            # Handle non-numeric input
+            print("Invalid input. Please enter a numeric value.")
+    
+    # If all attempts are used without a correct guess, return False
+    print(f"Sorry, you've used all your attempts. The correct number was {target_number}.")
+    return False
+    
+  

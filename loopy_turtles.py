@@ -78,6 +78,23 @@ def draw_square(t, start_x, start_y, length, rotation_direction, fill_color):
     :param rotation_direction: Either 'left' or 'right', indicating the direction the turtle should rotate after it completes each line of the rectangle.
     :param fill_color: The color with which to fill in the area drawn by the turtle.
     """
+# Move the turtle to the starting position
+    pick_up_and_move_turtle(t, start_x, start_y)
+
+    # Set the fill color
+    t.fillcolor(fill_color)
+    t.begin_fill()
+
+    # Draw the square
+    for _ in range(4):
+        print_turtle_position(t)  # Print the turtle's position
+        t.forward(length)  # Draw a side of the square
+        if rotation_direction == 'left':
+            t.left(90)  # Rotate left
+        elif rotation_direction == 'right':
+            t.right(90)  # Rotate right
+
+    t.end_fill()
 
 
 def draw_star(
@@ -100,3 +117,29 @@ def draw_star(
     :param initial_rotation_direction: The direction of the first rotation the turtle should make when drawing each point, either 'left' or 'right'.
     :param fill_color: The color with which to fill in the area drawn by the turtle.
     """
+# Move the turtle to the starting position
+    pick_up_and_move_turtle(t, start_x, start_y)
+
+    # Set the fill color
+    t.fillcolor(fill_color)
+    t.begin_fill()
+
+    # Calculate the smaller angle
+    smaller_angle = angle - 72
+
+    # Draw the star
+    for _ in range(5):
+        print_turtle_position(t)  # Print the turtle's position
+        t.forward(length)  # Draw the first line of the point
+        if initial_rotation_direction == 'left':
+            t.left(angle)  # Rotate left by the larger angle
+        elif initial_rotation_direction == 'right':
+            t.right(angle)  # Rotate right by the larger angle
+        t.forward(length)  # Draw the second line of the point
+        if initial_rotation_direction == 'left':
+            t.right(smaller_angle)  # Rotate right by the smaller angle to reset direction
+        elif initial_rotation_direction == 'right':
+            t.left(smaller_angle)  # Rotate left by the smaller angle to reset direction
+
+    t.end_fill()
+
